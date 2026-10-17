@@ -1,0 +1,12 @@
+# Copied to supoclip/docker-compose.override.yml by setup.sh.
+# Runs Ollama in its own container, as in the self-hosting tutorial (#local).
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: supoclip-ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_models:
