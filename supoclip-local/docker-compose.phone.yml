@@ -1,0 +1,20 @@
+# Copied to supoclip/docker-compose.override.yml by `setup.sh --phone`.
+# Same as docker-compose.ollama.yml, plus the frontend and backend published on
+# every network interface so a phone on the same Wi-Fi can reach them.
+# Ollama, Postgres and Redis stay private to the Docker network.
+services:
+  frontend:
+    ports: !override
+      - "0.0.0.0:3107:3107"
+  backend:
+    ports: !override
+      - "0.0.0.0:8000:8000"
+  ollama:
+    image: ollama/ollama
+    container_name: supoclip-ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_models:
